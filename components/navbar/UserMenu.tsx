@@ -55,11 +55,7 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
       
     </div>
   
-    <div className=''>
-      <Modal open={open} setOpen={setOpen} >
-      <UserRegisterForm closeDialog={toggleDialog} />
-    </Modal>
-    </div>
+    <Modal open={open} setOpen={setOpen} />
   </div>
 }
 
