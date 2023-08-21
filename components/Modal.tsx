@@ -15,20 +15,21 @@ import { useRef } from "react"
 import { X } from "lucide-react";
 import React from "react";
 import useModal from "@/hooks/useModal";
-import UserRegisterForm from "./UserRegisterForm";
+import UserRegisterForm from "./RegisterForm";
 
 interface ModalProps {
+  children : React.ReactNode,
   className?: string,
   open : boolean,
   setOpen : React.Dispatch<React.SetStateAction<boolean>>,
 }
  
-const Modal = ({className, open , setOpen} : ModalProps) => {
+const Modal = ({className, open , setOpen, children} : ModalProps) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className={cn('max-w-[425px]', className)}>
-           <UserRegisterForm />
+           {children}
       </DialogContent>
     </Dialog>
   )

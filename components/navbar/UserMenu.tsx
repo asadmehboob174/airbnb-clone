@@ -4,11 +4,11 @@ import { FC, useRef, useState } from 'react'
 import { HiOutlineMenu } from 'react-icons/hi'
 import Avatar from '../Avatar';
 import {DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger} from '@/components/ui/dropdown-menu';
-import UserRegisterModal from '../Modal';
 import { Button } from '../ui/button';
-import UserRegisterForm from '../UserRegisterForm';
+import RegisterForm from '../RegisterForm';
 import React from 'react';
 import Modal from '../Modal';
+import LoginForm from '../LoginForm';
 
 interface UserMenuProps {
   
@@ -23,9 +23,14 @@ const footer = () => {
 const UserMenu: FC<UserMenuProps> = ({}) => {
 
   const [open, setOpen] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
 
-  const toggleDialog = () => {
-    setOpen(!open);
+  const openRegisterForm = () => {
+    setOpen(true);
+  }
+
+  const openLoginForm = () => {
+    setOpenLogin(true);
   }
 
   return <div className=''>
@@ -46,8 +51,8 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
         </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-40 absolute -right-5 md:-right-10 cursor-pointer p-0">
-            <DropdownMenuLabel className='hover:bg-zinc-100 py-3 px-4 text-sm font-semibold'>Login</DropdownMenuLabel>
-            <DropdownMenuLabel className='hover:bg-zinc-100 py-3 px-4 text-sm font-semibold' onClick={toggleDialog}>
+            <DropdownMenuLabel className='hover:bg-zinc-100 py-3 px-4 text-sm font-semibold' onClick={openLoginForm}>Login</DropdownMenuLabel>
+            <DropdownMenuLabel className='hover:bg-zinc-100 py-3 px-4 text-sm font-semibold' onClick={openRegisterForm}>
                 Sign Up
             </DropdownMenuLabel>
         </DropdownMenuContent>
@@ -55,7 +60,13 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
       
     </div>
   
-    <Modal open={open} setOpen={setOpen} />
+    <Modal open={open} setOpen={setOpen}>
+      <RegisterForm />
+    </Modal>
+
+    <Modal open={openLogin} setOpen={setOpenLogin}>
+      <LoginForm />
+    </Modal>
   </div>
 }
 

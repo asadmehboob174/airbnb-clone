@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod";
 import {FcGoogle} from 'react-icons/fc' 
+import { FaGithub} from 'react-icons/fa'
  
 import { Button } from "@/components/ui/button"
 import {
@@ -16,7 +17,6 @@ import { Input } from "@/components/ui/input"
 import Heading from "./ui/Heading"
 import { FC } from "react"
 import { useForm } from "react-hook-form"
-import { DialogFooter, DialogHeader, DialogTitle, DialogDescription } from "./ui/dialog"
 
 
 interface UserRegisterFormProps {
@@ -24,9 +24,6 @@ interface UserRegisterFormProps {
 }
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
   email: z.string().min(7, {
     message: "email must be at least 7 characters.",
   }),
@@ -40,7 +37,7 @@ const UserRegisterForm: FC<UserRegisterFormProps> = ({}) => {
 const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      email: "",
     },
   })
 
@@ -51,14 +48,12 @@ const form = useForm<z.infer<typeof formSchema>>({
    return (
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <DialogHeader className="">
-              <DialogTitle className="text-center">Register</DialogTitle>
-            </DialogHeader>
+             <h3 className="text-center font-semibold text-base">Login</h3>
             <div className="py-1">
                   <hr className="" />
                 </div>
-              <Heading className=" text-xl font-bold">Welcome to Airbnb</Heading>
-              <p className="text-sm font-normal !mt-1 text-gray-500">Create an account!</p>
+              <Heading className=" text-xl font-bold">Welcome back</Heading>
+              <p className="text-sm font-normal !mt-1 text-gray-500">Login an account!</p>
               <div className="grid grid-cols-1 items-center gap-3">
                 <FormField
               control={form.control}
@@ -67,19 +62,6 @@ const form = useForm<z.infer<typeof formSchema>>({
                 <FormItem>
                   <FormControl>
                     <Input placeholder="Email" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-                
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input placeholder="Name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -105,11 +87,14 @@ const form = useForm<z.infer<typeof formSchema>>({
                 <div className="py-2">
                   <hr className="" />
                 </div>
-               <Button variant={"outline"} className="border-gray-800" type="button">
-                 <FcGoogle />
-                 Continue with Google
+               <Button variant={"outline"} className="border-gray-800 flex items-center justify-start gap-[85px]" type="button">
+                 <FcGoogle size={18} />
+                 <span className="">Continue with Google</span>
                </Button>
-               <Button variant={"outline"} className="border-gray-800" type="button">Continue with Github</Button>
+               <Button variant={"outline"} className="border-gray-800 flex items-center justify-start gap-[85px]" type="button">
+                 <FaGithub size={18}  />
+                 <span className="">Continue with Github</span>
+               </Button>
             </footer>
           </form>
         </Form>
