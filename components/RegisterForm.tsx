@@ -1,13 +1,17 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Form, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import { RegisterRequest, RegisterValidator } from "@/lib/validators/register";
 import { toast } from "./ui/use-toast";
-import { FormControl, FormField, FormItem } from "./ui/form";
+import { Form,FormControl, FormField, FormItem } from "./ui/form";
 import { Input } from "./ui/input";
 import { FC } from "react";
 import { ToastAction } from "./ui/toast";
+import { Button } from "./ui/button";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+import Heading from "./ui/Heading";
 
 interface RegisterFormProps {
 }
@@ -78,6 +82,12 @@ const RegisterForm: FC<RegisterFormProps> = ({}) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         {/* ... rest of the form ... */}
 
+        <h3 className="text-center font-semibold text-base">Register</h3>
+            <div className="py-1">
+                  <hr className="" />
+                </div>
+              <Heading className=" text-xl font-bold">Welcome back</Heading>
+              <p className="text-sm font-normal !mt-1 text-gray-500">Register an account!</p>
         <FormField
           control={form.control}
           name="email"
@@ -85,7 +95,7 @@ const RegisterForm: FC<RegisterFormProps> = ({}) => {
             <FormItem>
               <FormControl>
                 <Input placeholder="Email" {...field} />
-                {error && <p>{error.message}</p>}
+                {/* {error && <p>{error.message}</p>} */}
               </FormControl>
             </FormItem>
           )}
@@ -98,7 +108,7 @@ const RegisterForm: FC<RegisterFormProps> = ({}) => {
             <FormItem>
               <FormControl>
                 <Input placeholder="Name" {...field} />
-                {error && <p>{error.message}</p>}
+                {/* {error && <p>{error.message}</p>} */}
               </FormControl>
             </FormItem>
           )}
@@ -111,13 +121,26 @@ const RegisterForm: FC<RegisterFormProps> = ({}) => {
             <FormItem>
               <FormControl>
                 <Input type="password" placeholder="Password" {...field} />
-                {error && <p>{error.message}</p>}
+                {/* {error && <p>{error.message}</p>} */}
               </FormControl>
             </FormItem>
           )}
         />
 
-        {/* ... rest of the form ... */}
+        <footer className="grid grid-cols-1 items-center gap-2 !mt-8">
+               <Button variant={"default"} className="border-red-800 bg-red-500 hover:bg-red-600" type="submit">Submit</Button>
+                <div className="py-2">
+                  <hr className="" />
+                </div>
+               <Button variant={"outline"} className="border-gray-800 flex items-center justify-start gap-[85px]" type="button">
+                 <FcGoogle size={18} />
+                 <span className="">Continue with Google</span>
+               </Button>
+               <Button variant={"outline"} className="border-gray-800 flex items-center justify-start gap-[85px]" type="button">
+                 <FaGithub size={18}  />
+                 <span className="">Continue with Github</span>
+               </Button>
+            </footer>
       </form>
     </Form>
   );
